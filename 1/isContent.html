@@ -8,6 +8,12 @@
 <h2>验证是否输入</h2>
 <input type="text" id="strs" value="    xxx">
 <input type="button" id="isContent" value="验证是否为空">
+
+<!--禁止输入-->
+<div>表单元素特殊属性 一<input type="text" value="禁止输入" disabled></div>
+<div>表单元素特殊属性 二<input type="text" value="禁止输入" disabled="disabled"></div>
+<div>表单元素特殊属性 三<input type="text" value="禁止输入" readonly></div>
+
 <script>
     window.onload = function () {
         var _isContent = document.getElementById("isContent")
