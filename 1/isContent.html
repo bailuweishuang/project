@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>验证是否输入</h2>
+<input type="text" id="strs" value="    xxx">
+<input type="button" id="isContent" value="验证是否为空">
+<script>
+    window.onload = function () {
+        var _isContent = document.getElementById("isContent")
+        var _strs = document.getElementById("strs");
+
+        _isContent.onclick = function () {
+            if(!_strs.value.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,"")){
+                alert("您的输入为空!");
+            }else {
+                alert("您的输入不为空！")
+            }
+        }
+    }
+</script>
+</body>
+</html>
