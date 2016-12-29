@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
         #totop {
             position: fixed;
             right: 100px;
@@ -16,7 +20,13 @@
             font-size: 14px;
             font-weight: 700;
             display: none;
+            cursor: pointer;
             border: 1px solid #ccc;
+        }
+        #crumbs {
+            position: relative;
+            left: 100px;
+            top: 100px;
         }
         #crumbs ul {
             list-style: none;
@@ -71,6 +81,102 @@
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
         }
+
+        #tanchu {
+            position: absolute;
+            left: 500px;
+            top: 200px;
+            width: 500px;
+            height: 326px;
+            border: 1px solid#cccccc;
+            background-color: white;
+            border-radius: 6px;
+        }
+        #tanchu .tanchu_top {
+            position: relative;
+            height: 50px;
+            width: 500px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+            background-color: #2d2d2d;
+            line-height: 50px;
+            border-radius: 6px 6px 0 0;
+            cursor: move;
+        }
+        #tanchu .tanchu_c {
+            padding: 20px;
+            width: 200px;
+            margin: 0 auto;
+        }
+        #tanchu .tanchu_c input {
+            width: 200px;
+            height: 26px;
+            margin-bottom: 20px;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+        }
+        #tanchu .tanchu_c_la {
+            font-size: 12px;
+            color: #666;
+
+        }
+        #tanchu .tanchu_c_la input {
+            width: 20px;
+            height: 15px;
+            vertical-align: top
+        }
+        #tanchu .tanchu_c_la a {
+            margin-left: 66px;
+            text-decoration: none;
+            color: #666666;
+        }
+        #tanchu .tanchu_c button {
+            width: 200px;
+            background-color: #2172C1;
+            height: 32px;
+            color: white;
+            font-size: 14px;
+            border-radius: 6px;
+            letter-spacing: 7px;
+            line-height: 28px;
+            cursor: pointer;
+        }
+        #tanchu .tanchu_c button:hover {
+            background-color: #60AAF3;
+        }
+        #tanchu .tanchu_foot {
+            width: 500px;
+            margin-top: 20px;
+            border-top: 1px solid #cccccc;
+        }
+        #tanchu .tanchu_foot .tanchu_foot_deng {
+            width: 500px;
+            height: 20px;
+            line-height: 20px;
+            margin-top: 16px;
+        }
+        #tanchu .tanchu_foot .tanchu_foot_deng a {
+            font-size: 12px;
+            color: #666666;
+            text-decoration: none;
+        }
+        #tanchu .tanchu_foot .tanchu_foot_deng .a1 {
+            float: right;
+        }
+        #tanchu #denglu_span {
+            z-index: 2;
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            top: 12px;
+            right: 10px;
+            background: url("img/layer.png") 0 -94px no-repeat;
+            cursor: pointer;
+        }
+        p {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -82,6 +188,31 @@
         <li><a href="#">Info</a></li>
         <li><a href="#">Contact</a></li>
     </ul>
+</div>
+
+<!--拖拽-->
+<div id="tanchu">
+    <div class="tanchu_top" >
+        <p>手机号登录</p>
+        <span id="denglu_span"></span>
+    </div>
+    <div class="tanchu_c">
+        <form action="" method="post">
+            <input type="text" class="text_c" placeholder="请输入手机号">
+            <input type="text" class="text_c" placeholder="请输入密码">
+            <div class="tanchu_c_la">
+                <label><input type="checkbox">自动登录</label>
+                <a href="javascript:;">忘记密码？</a>
+            </div>
+            <button type="submit" value="登录" >登录</button>
+        </form>
+    </div>
+    <div class="tanchu_foot">
+        <div class="tanchu_foot_deng">
+            <a href="javascript:;" style="padding-left: 14px;color: #0c72c3">< 其他登录方式</a>
+            <a href="javascript:;" class="a1" style="padding-right: 14px; ">没有账号？免费注册 ></a>
+        </div>
+    </div>
 </div>
 <div>
     <p>1</p>
@@ -123,6 +254,7 @@
 </div>
 <script type="text/javascript">
     window.onload = function () {
+        /*回到顶部*/
         var toTop = document.getElementById("totop");
         window.onscroll = function () {
             if(document.documentElement.scrollTop||document.body.scrollTop>200){
@@ -130,9 +262,37 @@
             }else {
                 toTop.style.display = "none";
             }
-        }
+        };
+
         toTop.onclick = function () {
             document.documentElement.scrollTop = document.body.scrollTop = 0+'px';
+        }
+
+        /*拖拽*/
+        var x=0;
+        var y=0;
+        var tanchu = document.getElementById("tanchu");
+        var denglu_span = document.getElementById('denglu_span')
+
+        denglu_span.onclick = function () {
+            tanchu.style.display = "none";
+        };
+
+        tanchu.onmousedown = function (ev) {
+
+            var oEvent = ev||event;
+            x = oEvent.clientX-tanchu.offsetLeft;
+            y = oEvent.clientY-tanchu.offsetTop;
+            document.onmousemove = function (ev) {
+                var oEvent = ev||event;
+                tanchu.style.left = oEvent.clientX-x+'px';
+                tanchu.style.top = oEvent.clientY-y+'px';
+                console.log(44)
+            };
+            tanchu.onmouseup = function () {
+                document.onmousemove = null;
+                tanchu.onmouseup= null;
+            }
         }
     }
 </script>
