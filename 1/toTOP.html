@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #totop {
+            position: fixed;
+            right: 100px;
+            bottom: 2px;
+            padding: 4px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: red;
+            font-size: 14px;
+            font-weight: 700;
+            display: none;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<div id="totop">
+    回到顶部
+</div>
+<script type="text/javascript">
+    window.onload = function () {
+        var toTop = document.getElementById("totop");
+        window.onscroll = function () {
+            if(document.documentElement.scrollTop||document.body.scrollTop>200){
+                toTop.style.display = "block";
+            }else {
+                toTop.style.display = "none";
+            }
+        }
+        toTop.onclick = function () {
+            document.documentElement.scrollTop = document.body.scrollTop = 0+'px';
+        }
+    }
+</script>
+</body>
+</html>
