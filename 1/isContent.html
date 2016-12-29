@@ -15,21 +15,139 @@
 <div>表单元素特殊属性 三<input type="text" value="禁止输入" readonly></div>
 <!--禁止输入 2 -->
 <div>javaScript控制 <input type="text" value="禁止输入" id="inhibiting"></div>
+
+<!--禁止复制 粘贴-->
+<input type="text"  id="banCP" >
+
+<!--只能输入汉字-->
+<input type="number" pattern=[0-9] value="HTML5只能输入数字">
+
+<input type="text" name="number" value="只能输入数字" id="banNumber">
+
+<!--密码强度验证-->
+<input type="password" id="password" data-hint="请输入密码">
+
+<!--回车提交表单-->
+<input type="text" id="submit" value="回车提交">
+<span id="showStrength"></span>
 <script>
     window.onload = function () {
         var _isContent = document.getElementById("isContent")
         var _strs = document.getElementById("strs");
-        var _inhib = document.getElementById("inhibiting");
-
-        _inhib.onfocus = function () {
-            -_inhib.blur();
-        }
-
         _isContent.onclick = function () {
             if(!_strs.value.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,"")){
                 alert("您的输入为空!");
             }else {
                 alert("您的输入不为空！")
+            }
+        }
+
+        <!--禁止输入 2 -->
+        var _inhib = document.getElementById("inhibiting");
+        _inhib.onfocus = function () {
+            -_inhib.blur();
+        }
+
+        <!--禁止复制 粘贴-->
+        var banCP = document.getElementById("banCP");
+        banCP.oncopy = function () {
+            return false;
+        };
+        banCP,onpaste = function () {
+            return false;
+        }
+
+        <!--只能输入汉字-->
+        var _banNumber = document.getElementById("banNumber");
+        clearNumber = function(tthis){
+            var _v = tthis.value;
+            tthis.value = _v.replace(/[^\u4e00-\u9fa5]/g,"");
+        }
+        _banNumber.onfocus = function () {
+            clearNumber(this);
+        }
+        _banNumber.onkeyup = function () {
+            clearNumber(this);
+        }
+        _banNumber.onblur = function () {
+            clearNumber(this);
+        }
+
+        <!--密码强度验证-->
+        function setCss(_this,cssOption) {
+            if(!_this||_this.nodeType === 3||_this.nodeType === 8||!_this.style){
+                return;
+            }
+            for(var cs in cssOption){
+                _this.style[cs] = cssOption[cs];
+            }
+            return _this;
+        }
+        function trim(chars) {
+            return (chars||"").replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,"");
+        }
+
+        function password(passwordStrenth,showStrength) {
+            var self = this;
+            passwordStrenth.onkeyup = function () {
+                var color = ["red","yellow","orange","green"],
+                        msgs = ["密码太短","弱","中","强"],
+                        strength = 0,
+                        v = trim(passwordStrenth.value)
+                vl = v.length,
+                        i = 0;
+
+                var charStrength = function () {
+                    if(char>48 && char<=57){
+                        return 1;
+                    }
+                    if (char>97&&char <=122){
+                        return 2
+                    }else {
+                        return 3;
+                    }
+                }
+                if(vl<6){
+                    showStrength.innerText = msgs[0];
+                    setCss(showStrength,{
+                        "color":color[0]
+                    })
+                }else {
+                    for(;i<vl;i++){
+                        strength+=charStrength(v.toLocaleLowerCase().charCodeAt(i));
+                    }
+                    if(strength<10){
+                        showStrength.innerText= msgs[1];
+                        setCss(showStrength,{
+                            "color":color[1]
+                        })
+                    }
+                    if(strength>10&&strength<15){
+                        showStrength.innerText= msgs[2];
+                        setCss(showStrength,{
+                            "color":color[2]
+                        })
+                    }
+                    if(strength>=15){
+                        showStrength.innerText = msgs[3];
+                        setCss(showStrength,{
+                            "color":color[3]
+                        })
+                    }
+                }
+            }
+        }
+        password(
+                document.getElementById('password'),
+                document.getElementById('showStrength')
+        );
+
+        /*回车提交表单*/
+        document.getElementById('submit').onkeyup = function (e) {
+            e = e||window.event;
+            var keycode = e.keyCode||e.which||e.charCode;
+            if(keycode === 13){
+                alert('回车提交成功');
             }
         }
     }
