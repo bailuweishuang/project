@@ -9,15 +9,21 @@
 <input type="text" id="strs" value="    xxx">
 <input type="button" id="isContent" value="验证是否为空">
 
-<!--禁止输入-->
+<!--禁止输入 1 -->
 <div>表单元素特殊属性 一<input type="text" value="禁止输入" disabled></div>
 <div>表单元素特殊属性 二<input type="text" value="禁止输入" disabled="disabled"></div>
 <div>表单元素特殊属性 三<input type="text" value="禁止输入" readonly></div>
-
+<!--禁止输入 2 -->
+<div>javaScript控制 <input type="text" value="禁止输入" id="inhibiting"></div>
 <script>
     window.onload = function () {
         var _isContent = document.getElementById("isContent")
         var _strs = document.getElementById("strs");
+        var _inhib = document.getElementById("inhibiting");
+
+        _inhib.onfocus = function () {
+            -_inhib.blur();
+        }
 
         _isContent.onclick = function () {
             if(!_strs.value.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,"")){
