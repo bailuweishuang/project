@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .content {
+        position: relative;
+        width: 600px;
+        height: 100px;
+        margin: 50px auto;
+    }
+    .content #imageContent {
+        position: relative;
+        width: 500px;
+        height: 100px;
+        border: 1px solid #0c72c3;
+        overflow: hidden;
+    }
+    .content #ulimage {
+        position: absolute;
+        top:0;
+        left: 0;
+    }
+    #ulimage li {
+        list-style: none;
+        float: left;
+    }
+    #ulimage li a img {
+        width: 100px;
+        height: 100px;
+    }
+    .content #leftv{
+        position: absolute;
+        top: 35px;
+        left: -30px;
+        display: block;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        background-color: blanchedalmond;
+        cursor: pointer;
+    }
+    .content #right {
+        position: absolute;
+        top: 35px;
+        right: 68px;
+        display: block;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        background-color: blanchedalmond;
+        cursor: pointer;
+    }
+</style>
+<body>
+<div class="content">
+<div id="imageContent">
+    <ul id="ulimage">
+        <li><a href="#"><img src="img/u=504634773,2884940232&fm=58.jpg" alt=""></a></li>
+        <li><a href="#"><img src="img/yuan.jpg" alt=""></a></li>
+        <li><a href="#"><img src="img/u=873115762,3654566623&fm=11&gp=0.jpg" alt=""></a></li>
+        <li><a href="#"><img src="img/u=504634773,2884940232&fm=58.jpg" alt=""></a></li>
+        <li><a href="#"><img src="img/yuan.jpg" alt=""></a></li>
+    </ul>
+</div>
+<span id="leftv"><</span>
+<span id="right">></span>
+</div>
+<script>
+    window.onload = function () {
+        var oUl = document.getElementById('ulimage');
+        var oLi = oUl.getElementsByTagName('li');
+        var left = document.getElementById('leftv');
+        var rightv = document.getElementById('right');
+        var timer = null;
+        var speed = 3;
+        oUl.innerHTML+= oUl.innerHTML;
+        oUl.style.width = oLi[0].offsetWidth*oLi.length+'px';
+        timer = setInterval(Move,30);
+        oUl.onmouseover = function () {
+            clearInterval(timer);
+        };
+        oUl.onmouseout = function () {
+            timer = setInterval(Move,30)
+        }
+        function Move(){
+            oUl.style.left = oUl.offsetLeft-speed+'px';
+            var x = parseInt(oUl.style.width);
+            if(oUl.offsetLeft<-x/2){
+                oUl.style.left = '0px';
+            };
+            if(oUl.offsetLeft>0){
+                oUl.style.left = -x/2+'px';
+            }
+        };
+        left.onclick = function () {
+           speed = 3;
+        };
+        rightv.onclick = function () {
+            speed = -3;
+        }
+    }
+</script>
+</body>
+</html>
