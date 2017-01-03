@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="file" id="input">
+<script type="text/javascript">
+    var input = document.getElementById("input");
+    var formData = new FormData();
+    formData.append("file",input.files[0]);
+
+    var url = "http://localhost:10108/test",
+            method = "POST";
+    function ajax(url,method,data) {
+        var xhr = null;
+        if(window.XMLHttpRequest){
+            xhr = new XMLHttpRequest();
+        }else if(window.AbstractView){
+            try {
+                xhr =  new ActiveXObject("Msxml2.XMLHTTP");
+            }catch (e) {
+                try {
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }catch (e) {
+                    alert("您的浏览器暂不支持Ajax!");
+                }
+            }
+        }
+        xhr.onerror = function (e) {
+            console.log(e);
+        }
+        xhr.open(method,url);
+        try{
+            setTimeout(function () {
+                xhr.send(data);
+            });
+        }catch (e){
+            console.log('error',e)
+        }
+        return xhr;
+    };
+
+    var xhr = ajax(url,method,formDate);
+    xhr.upload.onprogress = function (e) {
+        console.log('upload progerss:',e.loaded/e.total*100+"%");
+    };
+    xhr.upload.onload = function(){
+        console.log("upload onload.");
+    };
+    xhr.onload = function(){
+        console.log("onload.");
+    }
+</script>
+</body>
+</html>
