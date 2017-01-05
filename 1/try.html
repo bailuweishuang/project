@@ -8,6 +8,13 @@
             margin: 0;
             padding:0;
         }
+
+       a {
+           text-decoration: none;
+       }
+       li {
+           list-style: none;
+       }
         .container {
             width: 500px;
             margin: 10px auto;
@@ -31,7 +38,6 @@
             margin: 0;
             padding: 2px;
             padding-right: 8px;
-            list-style: none;
             float: left;
         }
         .container ul li:last-child {
@@ -39,16 +45,22 @@
         }
         .container ul li a {
             color: #2c3437;
-            text-decoration: none;
-        }
-        li {
-            display: inline-block;
         }
         #pic {
             margin-left: 32%;
         }
         #tit {
             margin-left: 10%;
+        }
+        #ul1 {
+            width: 70px;
+            height: 80px;
+            border: 1px solid #6A210C;
+            display: none;
+            margin-left: 20px;
+        }
+        #ul1 li {
+            margin: 6px 2px;
         }
     </style>
 </head>
@@ -63,17 +75,33 @@
     <div><img src="img/1.jpg" alt="" id="pic"></div>
     <div id="tit">getDate()  从 Date 对象返回一个月中的某一天 (1 ~ 31)。</div>
 </div>
+<button type="button" value="登录" id="btn">登录</button>
+<ul id="ul1">
+    <li><a href="">首页</a></li>
+    <li><a href="">关于我们</a></li>
+    <li><a href="">联系我们</a></li>
+</ul>
 <script type="text/javascript">
     window.onload = function () {
         var oUl = document.getElementById("ul");
         var oA = oUl.getElementsByTagName("a");
+        var ul1 = document.getElementById("ul1");
+        var btn = document.getElementById("btn");
             for(var i=0; i<oA.length;i++){
                 oA[i].onclick = function () {
                     pic(this);
                     return false;
                 }
             }
-
+            
+            btn.onclick = function (ev) {
+                var oEvent = ev||event;
+                ul1.style.display = "block";
+                oEvent.cancelBubble = true;
+            };
+            window.onclick = function () {
+                ul1.style.display = "none";
+            }
             function pic(which) {
                 var href = which.getAttribute("href");
                 var title = which.getAttribute("title");
