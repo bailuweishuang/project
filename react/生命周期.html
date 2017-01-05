@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+</head>
+<body>
+<div id="con"></div>
+<div id="cont"></div>
+<div id="conta"></div>
+<!--生命周期
+    组件本质是状态机  输入确定 输出一定是确定
+    状态发生转换时会触发不同的钩子函数 从而让开发者有机会做出响应
+
+    初始化——》运行中- -》销毁
+    初始化：getDefaultProps(组件第一次实例化时才调用 实例之间共享引用 )  getInitialState（初始化每个实例特有的状态） componentWillMount（render之前最后一次修改状态） render（只能访问this.props  this.state 不允许修改状态和DOM输出） componentDidMount（render之后  可以修改DOM）
+    运行中 componentWillReceiveProps（父组件修改属性触发，可以修改新属性、修改状态）  shouldComponentUpdate（返回false会阻止render调用） componentWillUpdate（不能修改属性和状态） render  componentDidUpdate（可以修改DOM）
+    销毁：componentWillUnmount(在删除组件之前进行清理操作)
+    -->
+<!--初始化
+
+
+-->
+<script type="text/babel">
+    var count = 0;
+    var style = {
+        color: 'red',
+        border: '1px solid #000',
+    };
+    var HelloWorld = React.createClass({
+        getDefaultProps :function () {
+            console.log()
+            return{name:'Tom'};
+        },
+        getInitialState: function () {
+            return {myCount:count++,
+                ready: false,
+            };
+        },
+        conponentWillMount: function () {
+            this.setState({ready: true});
+        },
+        render:function () {
+            return <p>Hello {this.props.name?this.props.name:"nha"}{""+this.state.ready}{this.state.myCount}</p>
+        },
+        /*componentDidMount:function () {
+            $(React.findDOMNode(this)).appendChild('sur')
+        } 用jquery*/
+    })
+    ReactDOM.render(<div style={style}><HelloWorld/></div>,document.getElementById('con'))
+    /*运行中*/
+
+    var Hello = React.createClass({
+        componentWillReceiveProps:function () {
+
+        },
+        shouldComponentUpdate:function () {
+            return true;
+        },
+        componentWillUpdate:function () {
+
+        },
+        render:function () {
+            return <p>hee,{this.props.name?this.props.name:"nha"}</p>
+        },
+        componentDidUpdate:function () {
+
+        }
+    })
+    var Heel = React.createClass({
+        getInitialState: function () {
+            return {name:''};
+        },
+        handleChange:function (event) {
+            this.setState({name:event.target.value});
+        },
+        render:function () {
+            return <div>
+                <Hello name={this.state.name}/>
+                <input type="text" onChange={this.handleChange}></input>
+            </div>
+        }
+    });
+    ReactDOM.render(<Heel/>,document.getElementById('cont'));
+   /* 销毁 另外一种：handleChange: function(event){
+                                        if(event.target.state=='123'){
+                                        React.unmountComponentAtNode(document.getElementById('')[0]//此处与 ReactDOM.render的第二个参数相同);
+                                        return;
+                                        }
+     }*/
+    var Xiaohui = React.createClass({
+        render:function () {
+            return <p>hello {this.props.name?this.props.name:"date"}</p>
+        },
+        componentWillUnmount:function () {
+            console.log("dddddddddd");
+        },
+    });
+
+    var Xiao = React.createClass({
+        getInitialState:function () {
+            return {name:""};
+        },
+        handleChange:function (event) {
+            this.setState({name: event.target.value});
+        },
+        render:function () {
+            if(this.state.name==123){
+                return <div>111</div>
+            };
+            return <div>
+                <Xiaohui name={this.state.name}/>
+                <input type="text" onChange={this.handleChange}/>
+            </div>
+        }
+    });
+    ReactDOM.render(<Xiao/>,document.getElementById('conta'));
+</script>
+</body>
+</html>

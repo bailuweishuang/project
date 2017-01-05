@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+*{
+    margin: 0;
+    padding: 0;
+}
+        ul{
+
+            width:1280px;
+            background-color: #000;
+            border: 1px solid #cccccc;
+        }
+        li{list-style:none;
+            width: 639px;
+            float: left;
+            text-align:center;
+            border-bottom: 1px solid #ffffff;
+            border-right: 1px solid #cccccc;
+        }
+        ul::after{
+            content: "";
+            display: block;
+            visibility: visible;
+            clear: both;
+
+                 }
+        div {
+            display: inline-block;
+            text-align: left;
+            color: white;
+
+        }
+    </style>
+</head>
+<body>
+
+    <ul>
+        <li><div>Comprehensive News</div></li>
+        <li><div>National News</div></li>
+        <li><div>ABCD</div></li>
+        <li><div>abcddddd</div></li>
+        <li><div>asdasdsda</div></li>
+        <li><div>asdadsadadss</div></li>
+        <li><div>asd</div></li>
+        <li><div>asdasd</div></li>
+    </ul>
+
+    <select class="item-inner item-right">
+        <option value ="volvo">2016-11-14  周一  上午</option>
+        <option value ="saab">2016-12-14  周一  上午</option>
+        <option value="opel">2016-13-14  周一  上午</option>
+        <option value="audi">2016-14-14  周一  上午</option>
+    </select>
+
+    <script>
+        var a = [];
+        for(var i=0; i<10; i++){
+            a[i]=function () {
+                console.log(i);
+            };
+        };
+        a[1]();
+
+        var b= [];
+        for (let i = 0; i < 10; i++) {
+            b[i] = function () {
+                console.log(i);
+            };
+        }
+        b[5]();
+    </script>
+</body>
+</html>

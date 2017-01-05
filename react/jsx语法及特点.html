@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+</head>
+<body>
+<div id="con"></div>
+<!--什么是jsx  javascript XML
+    基于ECMAScript的一种新特性
+    一种定义带属性树结构的语法
+
+    特点：类XML语法容易接受 增强js语义 结构清晰 抽象程度高 代码模块化
+
+    源码阅读：从执行顺序入行 适当忽略细节 重视烂笔头 反复阅读
+-->
+<!--
+    组件嵌套的本质是父子关系
+-->
+<script type="text/babel">
+    var GenderSelect = React.createClass({
+        render: function () {
+            return <select onchange={this.props.handleSelect}>
+                <option value="0">男</option>
+                <option value="1">女</option>
+            </select>
+        }
+    })
+    var SignuForm = React.createClass({
+        getInitialState: function () {
+            return {
+                name:'',
+                password:'',
+                gender:'',
+            }
+        },
+        handleChange:function (name,event) {
+            var newState = {}
+            newState[name] = event.target.value
+            this.setState(newState)
+        },
+        handleSelect: function () {
+          this.setState({gender: event.target.value})
+        },
+        render: function () {
+            return <form action="">
+            <input type="text" placeholder="请输入用户名" onChange={this.handleChange.bind(this,'name')}/>
+            <input type="password" placeholder="请输入密码" onChange={this.handleChange.bind(this,'password')}/>
+            <GenderSelect handleSelect={this.handleSelect}/>
+        </form>
+    }
+    })
+    ReactDOM.render(<SignuForm/>,document.getElementById('con'));
+</script>
+</body>
+</html>

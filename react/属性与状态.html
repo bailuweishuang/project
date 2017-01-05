@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+</head>
+<body>
+<!--
+        属性：props = properties 一个事物的性质和关系  无法修改 是父组件传递的
+        用法：一： <hello name=?/>  ?:  1:"time"  2 {123} {"time"} 3 {[1,2,3]}
+              二： var props={one:"sss,two:321}  <helle {...props}/>
+              三： var instance = React.render(<hello/>,document.body); instance.setProps({name:"Tim"});
+
+        状态：state 事物所处的状况 事物自行处理  不断变化的   getInutialState  setState（经常用到） 更新组件状态
+
+
+        二者相似：  都是纯js对象  都会触发render更新  都具有确定性
+
+
+        组件在运行时需要修改的数据就是状态
+-->
+<div id="CCC"></div><div id="ddd"></div>
+<script type="text/babel">
+    var Hello = React.createClass({
+        render:function () {
+            return <p>hello  {this.props.name1} {this.props.name?this.props.name:"nha"}</p>
+        },
+    });
+    var Hellow = React.createClass({
+        getInitialState:function () {
+            return { name1: "nihai",
+                name: "ss",
+            };
+        },
+        handleChange: function (event) {
+            this.setState({
+                name1:event.target.value
+            });
+        },
+
+        handleChange1: function (event) {
+            this.setState({
+                name:event.target.value,
+            });
+        },
+        render:function () {
+            return <div>
+                <Hello {...this.state}/>
+                <input type="text" onChange={this.handleChange}/>
+                <input type="text" onChange={this.handleChange1}/>
+            </div>
+        }
+    });
+    ReactDOM.render(<Hellow/>,document.getElementById('CCC'));
+    var Content = React.createClass({
+        getInitialState:function () {
+            return {
+                inputText:"",};
+        },
+        handleChange: function (event) {
+            this.setState({inputText:event.target.value});
+        },
+        handleSubmit:function () {
+            console.log("reply To:"+this.props.selectName+"\n"+this.state.inputText);
+        },
+       render:function () {
+           return <div>
+               <textarea onChange={this.handleChange} placeholder="请输入..."></textarea>
+               <button onClick={this.handleSubmit}>submit</button>
+           </div>
+       }
+    });
+    var Contment = React.createClass({
+        getInitialState: function () {
+            return {name:['tom','apple','aaa'],
+                     selectName:'',};
+
+        },
+        handleSelect:function (event) {
+            this.setState({selectName:event.target.value});
+        },
+        render:function () {
+             var options=[];
+            for(var option in this.state.name){
+                options.push(<option value={this.state.name[option]}>{this.state.name[option]}</option>)
+            };
+            return <div>
+                <select onChange={this.handleSelect}>
+                    {options}
+                </select>
+                <Content selectName={this.state.selectName}/>
+            </div>
+        }
+    });
+    ReactDOM.render(<Contment/>,document.getElementById('ddd'));
+</script>
+</body>
+</html>

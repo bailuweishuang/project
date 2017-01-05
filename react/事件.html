@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+</head>
+<body>
+<!--
+    事件  2种方法 本身的 用户自定义的
+
+    触摸{onTouchCancel/End/Move/Start}  键盘{onKeyDown/Press/Up} 剪切{onCopy/Cut/Psate}
+    表单{onChange/Input/Submit} 焦点{onFocus/Blur} UI元素{onScroll} 滚动{onWheel}
+    鼠标{onClick onContextMenu onDoubleClick onMouseDown onMouseEnter/Leave/Move/Out/Over/Up}
+-->
+<div id="aa"></div>
+<div id="cc"></div>
+<script type="text/babel">
+    var L = React.createClass({
+        render:function () {
+            return <p>hell {this.props.name?this.props.name:'aaa'}</p>
+        }
+    })
+    var Hell = React.createClass({
+        getInitialState:function () {
+            return {name:'nihao'}
+        },
+        handleChange:function (event) {
+            this.setState({name:event.target.value})
+        },
+        render:function () {
+            return <div>
+                <L name={this.state.name}/>
+                <input type="text" onChange={this.handleChange}/>
+
+            </div>
+        }
+    })
+    ReactDOM.render(<Hell/>,document.getElementById('aa'));
+    
+    
+    var Scoll = React.createClass({
+        getInitialState:function () {
+            return {backgroundColor:"#FFFFFF"}
+        },
+        handleWheel:function (event) {
+            var newColor = (parseInt(this.state.backgroundColor.substr(1),16)+event.deltaY*997).toString(16);
+            newColor = '#'+newColor.substr(0,6).toUpperCase();
+            this.setState({
+                backgroundColor:newColor
+            })
+        },
+        render:function () {
+            console.log(this.state);
+            return<div onWheel={this.handleWheel} style={this.state}>
+                <p>走在孤独的大街上</p>
+            </div>
+        }
+    })
+    ReactDOM.render(<Scoll/>,document.getElementById('cc'))
+</script>
+</body>
+</html>

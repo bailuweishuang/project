@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello word</title>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            width: 200px;
+            list-style: none;
+            padding: 10px 0;
+            margin-top: 20px;
+            background-color: #ffa;
+        }
+       ul li {
+            color: red;
+            font-size: 14px;
+           line-height: 30px;
+           text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="menu"></div>
+    <div id="top"></div>
+    <script type="text/javascript">
+        //react 是创建了一虚拟的DOM，这个DOM不是真正页面中DOM元素（实质是一个js对象，用js对象
+        //储存dom上的信息，因此比真实的dom小的多，因为它只记录一些必要的信息 ）
+        //在前端开发一个web应用于开发一个网站不同，web应用通常是一个单页面，因此每一次都做一些
+        //交互涉及dom的操作，无节制的操作dom会影响页面性能，操作虚拟dom 在必要的时候将这些需要改变视图渲染到页面中会优化这些性能问题； 性能优化：1 渲染时性能的优化（重要就是虚拟dom） 2 开发时的优化  不需要依赖于某个端
+      var h1 = React.createElement(
+                'h1',
+                {
+                    title: 'this is a title'
+                },
+                '爱创课堂'
+        );
+        console.log(h1);
+        ReactDOM.render(h1,document.getElementById('container'));
+        //如何将虚拟dom渲染到某个端上就要引入不同创建  调用不同render方法
+
+        /*var ul = React.createElement(
+                'ul',
+                null,
+
+                React.createElement(
+                        'li',
+                        null,
+                        '女装 / 男装 / 内衣'
+                ),
+                React.createElement(
+                      'li',
+                        null,
+                        '苹果 / 香蕉 / 荔枝'
+                ),
+                React.createElement(
+                        'li',
+                        null,
+                        '蓝色 / 黄色 / 绿色'
+                )
+        );*/
+        //如果一个虚拟dom复用多次我们将它封装在一个组建中 用组件创建一组虚拟dom
+        //创建组件的方法：createClass  参数是一个对象 对象中的属性和方法是对组件说明
+        // 有一个属性叫render方法 是将组件中的虚拟dom输出的 所以我们将虚拟dom定义render方法中
+        //Render 返回值是 虚拟dom树  作用域是组件当前对象 组件的名称通常第一个字母大写
+
+        var Uls = React.createClass({
+            render:function () {
+                return React.createElement(
+                        'ul',
+                        null,
+
+                        React.createElement(
+                                'li',
+                                null,
+                                '女装 / 男装 / 内衣'
+                        ),
+                        React.createElement(
+                                'li',
+                                null,
+                                '苹果 / 香蕉 / 荔枝'
+                        ),
+                        React.createElement(
+                                'li',
+                                null,
+                                '蓝色 / 黄色 / 绿色'
+                        )
+                );
+            }
+        });
+        //将组件渲染到页面要转化为虚拟dom
+        //组件转化为虚拟dom
+        var ul = React.createElement(Uls)
+        console.log(Uls)
+        var ul2 = React.createElement(Uls);
+        ReactDOM.render(ul2,document.getElementById('top'));
+        ReactDOM.render(ul,document.getElementById('menu'));
+     </script>
+</body>
+</html>

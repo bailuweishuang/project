@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+</head>
+<body>
+<div id="cont"></div>
+<div id="conte"></div>
+<!--// 非dom属性：dangerouslySetlnnerHTML(直接插入HTML代码) ref（父组件引用子组件） key（提高渲染性能）-->
+<script type="text/babel">
+    var style = {
+        color:'red',
+        border: '1px solid #ccc',
+        margin: '10px',
+        width: '100px'
+    }
+    var Hello = React.createClass({
+        render: function () {
+            return <div>木渴望</div>
+        }
+    })
+    var Left = {
+        __html: "<h1>谈谈心</h1>"
+    }
+    ReactDOM.render(<div style={style} dangerouslySetInnerHTML={Left}></div> ,document.getElementById('cont'))
+    ReactDOM.render(<div style={style}><Hello></Hello></div> ,document.getElementById('conte'))
+    // 类容类似的组件形成一个组件  列表元素要加上不同的key(指在同一个组件中)
+    var Hleeo = React.createClass({
+        render: function () {
+            return <ul>
+                <li key="1">1</li>
+                <li key="2">2</li>
+                <li key="3">3</li>
+            </ul>
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+<style>
+    #container {
+
+    }
+</style>
+</head>
+<body>
+<div id="container"></div>
+<div id="menu"></div>
+<script type="text/babel">
+    var  style = {
+        color:'red',
+        border: '1px solid #ccc',
+    }
+    // 条件判断的4种写法 if: 三元表达式 使用变量 直接调用  比较运算符
+/*     三元表达式  var Hello = React.createClass({
+     render:function () {
+     return <div
+     /!*nidau*!/
+     //注释
+     id="top">Hello{this.props.name?this.props.name:"出脱"}
+     {
+     //注释 badjsdosdksdsdsdlsksd
+     /!* "nihao"*!/
+     //在自定义标签外面套一层标签 再把style赋值给它
+     }</div>;
+     }
+     });
+
+
+    ReactDOM.render(<div style={style}><Hello /></div>,document.getElementById('container'));*/
+
+   /*  使用变量    var Hello = React.createClass({
+       getName: function () {
+            if(this.props.name)
+               return this.props.name;
+            else
+               return "mmmm"
+
+           },
+           render: function () {
+               var name = this.getName();
+               return <p>hello {name}</p>
+           }
+    });
+    ReactDOM.render(<div style={style}><Hello /></div>,document.getElementById('container'));*/
+ /* 直接调用  var Hello = React.createClass({
+        getName: function () {
+            if(this.props.name)
+                return this.props.name;
+            else
+                return "mmmm"
+
+        },
+        render: function () {
+            return <p>hello {this.getName()}</p>
+        }
+    });
+    ReactDOM.render(<div style={style}><Hello /></div>,document.getElementById('container'));*/
+   /* 比较运算符 var Hello = React.createClass({
+        getName: function () {
+            if(this.props.name)
+                return this.props.name;
+            else
+                return "mmmm"
+
+        },
+        render: function () {
+            return <p>hello {this.props.name || "大河向东流"}</p>
+        }
+    });
+    ReactDOM.render(<div style={style}><Hello /></div>,document.getElementById('container'));*/
+/*    var Hello = React.createClass({
+        getName: function () {
+            if(this.props.name)
+                return this.props.name;
+            else
+                return "mmmm"
+
+        },
+        render: function () {
+            return <p>hello {
+                (function (obj) {
+                    if(obj.props.name)
+                        return obj.props.name
+                    else
+                        return "天上的星星"
+                })(this)
+            }</p>
+        }
+    });
+    ReactDOM.render(<div style={style}><Hello /></div>,document.getElementById('container'));*/
+var style = {
+    color: 'red',
+    width: '100px',
+}
+
+   var Mune = React.createClass({
+        render: function () {
+            return  <div>
+                        <ul>
+                            <li>首页</li>
+                            <li>关于我们</li>
+                            <li>联系我们</li>
+                        </ul>
+                    </div>
+        }
+    });
+    ReactDOM.render(<div style={style}><Mune /></div>,document.getElementById('menu'));
+</script>
+</body>
+</html>
