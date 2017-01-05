@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+       * {
+            margin: 0;
+            padding:0;
+        }
+        .container {
+            width: 500px;
+            margin: 10px auto;
+        }
+        .container ul {
+            margin: 10px auto;
+            width: 200px;
+            border: 1px solid #6A210C;
+        }
+       .container ul:after {
+           content: "";
+           display: block;
+           visibility: hidden;
+           clear: both;
+           height: 0;
+
+       }
+        .container ul li {
+            border-right: 1px solid #0c72c3;
+            width: 39px;
+            margin: 0;
+            padding: 2px;
+            padding-right: 8px;
+            list-style: none;
+            float: left;
+        }
+        .container ul li:last-child {
+            border: none;
+        }
+        .container ul li a {
+            color: #2c3437;
+            text-decoration: none;
+        }
+        li {
+            display: inline-block;
+        }
+        #pic {
+            margin-left: 32%;
+        }
+        #tit {
+            margin-left: 10%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <ul id="ul">
+        <li><a href="img/1.jpg" title="getDate()  从 Date 对象返回一个月中的某一天 (1 ~ 31)。">DATE</a></li>
+        <li><a href="img/2.jpg" title="getDay()  从 Date 对象返回一周中的某一天 (0 ~ 6)。">DAY</a></li>
+        <li><a href="img/3.jpg" title="getMonth()  从 Date 对象返回月份 (0 ~ 11)">MONTH</a></li>
+        <li><a href="img/4.jpg" title="getFullYear()  从 Date 对象以四位数字返回年份">YEAR</a></li>
+    </ul>
+    <div><img src="img/1.jpg" alt="" id="pic"></div>
+    <div id="tit">getDate()  从 Date 对象返回一个月中的某一天 (1 ~ 31)。</div>
+</div>
+<script type="text/javascript">
+    window.onload = function () {
+        var oUl = document.getElementById("ul");
+        var oA = oUl.getElementsByTagName("a");
+            for(var i=0; i<oA.length;i++){
+                oA[i].onclick = function () {
+                    pic(this);
+                    return false;
+                }
+            }
+
+            function pic(which) {
+                var href = which.getAttribute("href");
+                var title = which.getAttribute("title");
+                var pic = document.getElementById("pic");
+                var tit = document.getElementById("tit");
+                pic.setAttribute("src",href);
+                tit.firstChild.nodeValue = title;
+            }
+    }
+</script>
+</body>
+</html>
