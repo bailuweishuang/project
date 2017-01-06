@@ -3,8 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .output {
+            font-weight: bold;
+        }
+        #payment {
+            text-decoration: underline;
+        }
+        #graph {
+            border: 1px solid black;
+        }
+        td,th {
+            vertical-align: top;
+        }
+    </style>
 </head>
 <body>
+<table>
+    <tr>
+        <th>Enter loan Data:</th>
+        <td></td>
+        <th>Loan Balance, Cumulative Equity, and Interest Payments</th>
+    </tr>
+    <tr>
+        <td>Amount of the loan($):</td>
+        <td><input id="amount" onchange="calculate();"></td>
+        <td rowspan="8"><canvas id="graph" width="400" height="250"></canvas></td>
+    </tr>
+    <tr>
+        <td>Annual interest(%):</td>
+        <td><input id="apr" onchange="calculate();"></td>
+    </tr>
+    <tr>
+        <td>Repayment period(years):</td>
+        <td><input id="years" onchange="calculate();"></td>
+    </tr>
+    <tr>
+        <td>Zipcode (to find lenfers):</td>
+        <td><input id="zipcode" onchange="calculate();"></td>
+    </tr>
+    <tr>
+        <th>Approximate Payments:</th>
+        <td>
+            <button onclick="calculate();">Calculate</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Monthly payment:</td>
+        <td>$<span class="output" id="payment"></span></td>
+    </tr>
+    <tr>
+        <td>Total payment:</td>
+        <td>$<span class="output" id="total"></span></td>
+    </tr>
+    <tr>
+        <td>Total interset:</td>
+        <td>$<span class="output" id="totalinterest"></span></td>
+    </tr>
+    <tr>
+        <th>Sponsors:</th>
+        <td colspan="2">
+            Apply for your loan with one of these fine lenders:
+            <div id="lenders"></div>
+        </td>
+    </tr>
+</table>
+<script>
+    "use strict"; // 如果浏览器支持的话  则开启ECMAScript 5 的严格模式
+    function calculate() {
+        var amount = document.getElementById("amount");
+        var apr = document.getElementById("apr");
+        var years = document.getElementById("years");
+        var zipcode = document.getElementById("zipcode");
+        var payment = document.getElementById("payment");
+        var total = document.getElementById("total");
+        var totalinterest = document.getElementById("totalinterest");
 
+        var principal = parseFloat(amount.value);
+        var interest = parseFloat(apr.value)/100/12; //将百分比格式转换位小数格式 并从年利率转换位月利率
+        var payments = parseFloat(years.value)*12; //将年度赔付转换位月度赔付
+
+        //计算月度赔付的数据
+        var x = Math.pow(1+interest,payments);
+        var monthly = (principal*x*interest)/(x-1);
+
+        if(isFinite(monthly)){
+            //将数据填充至输出字段的位置，四舍五入到小数点后两位数字
+            payment.innerHTML = monthly.toFixed(2);
+            total.innerHTML = (monthly*payment).toFixed(2);
+            totalinterest.innerHTML = ((monthly*payment)-principal).toFixed(2);
+
+            //将用户的输入数据保存下来，这样在下次访问时也能取到数据
+            save(amount.value,apr.value,years.value,zipcode.value);
+
+            //找到并展示本地放贷人，但忽略网络异常
+            try{
+                //捕获这段代码抛出的所有异常
+                getLenders(amount.value,apr.value,years.value,zipcode.value);
+            }
+            catch (e){
+                //忽略这些异常
+            }
+            //最后，用图像展示贷款余额、利息和资产收益
+            chart(principal,interest,monthly,payments);
+        }else {
+            //计算结果不是数字或者时无穷大，意味着输入数据时非法或不完整的
+            //清空之前的输出数据
+            payment.innerHTML = "";
+            total.innerHTML = "";
+            totalinterest.innerHTML = "";
+            chart(); //不传参数的话就是清除图表
+        }
+    }
+    //将用户的输入保存到localStorage对象的属性中
+    //这些属性在再次访问时还会继续保持在原位置
+    //如果你在浏览器中按照file://URL的方式直接打开本地文件
+    //则无法在浏览器中使用储存功能（比如FireFox）
+    //而通过HTTP打开文件是可行的
+    function sava(amount,apr,years,zipcode) {
+        if(window.localStorage){   //只有在浏览器支持的时候才运行这里的代码
+            localStorage.loan_amount = amount;
+            localStorage.loan_apr = apr;
+            localStorage.loan_years = years;
+            localStorage.loan_zipcode = zipcode;
+        }
+    }
+    //在文档首次加载时，将会尝试还原输入字段
+    window.onload = function () {
+        //如果浏览器支持储存并且上次保存的值时存在的
+        if(window.localStorage && localStorage.loan_amount){
+            document.getElementById("amount").value = localStorage.loan_amount;
+            document.getElementById("apr").value = localStorage.loan_apr;
+            document.getElementById("years").value = localStorage.loan_years;
+            document.getElementById("zipcode").value = localStorage.loan_zipcode;
+        }
+    };
+    //将用户的输入发送到服务器端脚本
+    //返回一个本地放贷人的连接列表，在这个例子中并没有实现这种查找放贷人的服务
+    //但如果该服务存在，该函数会使用它
+    function getLenders(amount,apr,years,zipcode) {
+        //如果浏览器不支持XMLHttpRequest对象，则退出
+        if(!window.XMLHttpRequest) return;
+
+        //找到要显示放贷人列表元素
+        var ad = document.getElementById("lenders");
+        if(!ad) {
+            return;
+        }
+        //将用户的输入数据进行URL编码，并作为查询参数附加在URL里
+        var url = "getLenders.php"+"?amt+"+encodeURIComponent(amount)+"&apr="+encodeURIComponent(apr)+"&yrs="+encodeURIComponent(years)+"&zip="+encodeURIComponent(zipcode); //处理数据的URL地址 使用查询串中的数据
+        //通过XMLHttpRequest对象来提取返回数据
+        var req = new XMLHttpRequest(); //发起一个新的请求
+        req.open("GET",url); // 通过URL发起一个HTTP GET 请求
+        req.send(url);//不带任何正文发送这个请求
+
+        //在返回数据之前 注册了一个事件处理函数
+        //将会在服务器的响应返回至客户端的时候调用
+        //这种异步编程模式在客户端Javascript非常常见的
+        req.onreadystatechange = function () {
+            if(req.readyState == 4 && req.status ==200){
+                //如果代码运行到这里 说明我们得到了一个合法且完整的HTTP响应
+                var response = req.responseText;  //HTTP响应以字符串的形式出现的
+                var lenders = JSON.parse(response); //将其解析位JSshuz
+                //将数组中的放贷人对象转换为HTML字符串形式
+                var list = "";
+                for (var i=0; i<lenders.length;i++){
+                    list+="<li><a href='"+lenders[i].url+"'>"+lenders[i].name+"</a>"
+                }
+                //将数据在HTML元素中呈现出来
+                ad.innerHTML = "<ul>"+list+"</ul>>";
+            }
+        }
+    }
+    //在HTML<canvas>元素中用图表展示月度贷款余额、利息个资产收益
+    //如果不传入z
+</script>
 </body>
 </html>
