@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        p {
+        .ss {
             width: 120px;
             overflow: hidden;
             white-space:nowrap;
@@ -18,10 +18,31 @@
             -ms-text-overflow: clip;
             text-overflow: clip;
         }
+        .test {
+            width: 60px;
+            border: 1px solid #0c72c3;
+            white-space:nowrap;
+        }
+        .outer{
+            width:200px;
+            height:200px;
+            background:#000;
+            filter:alpha(opacity=20);
+            opacity:.2;
+        }
+        .inner{
+            width:200px;
+            height:200px;
+        }
     </style>
 </head>
 <body>
-<p>秋水共长天一色 落霞与孤鹜齐飞</p>
+<p class="ss">秋水共长天一色 落霞与孤鹜齐飞</p>
 <p class="cs">就在这花好月圆夜 我与你。。</p>
+<!--强制在一行显示-->
+<p class="test">他 曾把我手紧抓</p>
+
+<div class="outer"><!--我是透明的容器--></div>
+<div class="inner">我是不透明的内容</div>
 </body>
 </html>
