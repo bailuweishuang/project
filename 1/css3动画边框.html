@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #demo {
+            position: relative;
+            margin: 0 auto;
+            padding: 20px;
+            width: 300px;
+            border: 2px solid #2cc36b;
+        }
+        .animation {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg,#6A210C 25%,#0c72c3 25%,#0c72c3 50%,#6A210C 50%,#6A210C 75%,#0c72c3 75%);
+            background-size: 30px 30px;
+            -webkit-animation:go 0.3s linear infinite;
+            -o-animation:go 0.3s linear infinite;
+            animation:go 0.3s linear infinite;
+        }
+        @-moz-keyframes  go{
+            from{
+                background-position: 0 0;
+            }
+            to {
+                background-position: 60px 30px;
+            }
+        }
+        @-webkit-keyframes go {
+            from{
+                background-position: 0 0;
+            }
+            to {
+                background-position: 60px 30px;
+            }
+        }
+        @keyframes  go{
+            from{
+                background-position: 0 0;
+            }
+            to {
+                background-position: 60px 30px;
+            }
+        }
+        img {
+            position: absolute;
+            left: 30px;
+            top: 30px;
+            width: 280px;
+            height: 280px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+    <div class="animation"></div>
+    <img src="img/3.jpg" alt=""></div>
+</body>
+</html>
