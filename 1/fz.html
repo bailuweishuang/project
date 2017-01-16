@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #top {
+            width: 100%;
+            height: 70px;
+            background: url("img/topbar.png") repeat-x 0 -80px;
+        }
+        #top .wrop {
+            width: 1100px;
+            margin: 0 auto;
+        }
+        #top .t_left {
+            margin-top: 10px;
+            width: 176px;
+            float: left;
+        }
+        #top .t_left a {
+            float: left;
+            width: 160px;
+            height: 40px;
+            background: url("img/topbar.png") no-repeat;
+            text-indent: -9999px;
+        }
+
+        #top .t_center ul li {
+            float: left;
+            list-style: none;
+            background: url("img/topbar.png")0 -304px repeat-y;
+        }
+        #top .t_center ul li a{
+            height: 70px;
+            line-height: 70px;
+            font-size: 14px;
+            text-decoration: none;
+            color: #cccccc;
+            padding:0 20px;
+
+        }
+
+        #top .t_center .last {
+            position: relative;
+            border: none;
+        }
+        #top .t_center .cor {
+            display: block;
+            position: absolute;
+            top: 20px;
+            left: 92px;
+            width: 28px;
+            height: 19px;
+            background:  url("img/topbar.png") -190px 0;
+        }
+        #top .t_center .active {
+
+        }
+        #top .t_right {
+            float: right;
+            margin-right: 80px;
+            margin-top: 20px
+        }
+        .t_right .input {
+            display: block;
+            width: 250px;
+            height: 32px;
+            background: url("img/topbar.png") 0 -550px no-repeat;
+        }
+        .t_right #input_t_right {
+            float: left;
+            margin-left: 30px;
+            width: 159px;
+            border: none;
+            height: 30px;
+            background: transparent;
+            outline:medium;
+        }
+        .t_right .denglu {
+            float: right;
+            margin-top: -26px;
+            margin-left: 223px
+        }
+        .t_right .denglu a {
+            font-size: 12px;
+            color: #787878;
+            text-decoration: none;
+        }
+        .nemu_list {
+            width: 100%;
+            height: 35px;
+            line-height: 35px;
+            background: url("img/topbar.png") 0 -230px;
+        }
+        .nemu_list .ul_li {
+            width: 550px;
+            margin-left: 412px;
+        }
+        .nemu_list .ul_li li {
+            list-style: none;
+            float: left;
+            padding-left: 28px;
+
+        }
+        .nemu_list .ul_li li a {
+            font-size: 12px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 4px 14px;
+        }
+        .nemu_list .ul_li  .active_l {
+            background-color: maroon;
+            border: 1px solid maroon;
+            border-radius: 14px;
+        }
+        .nemu_list .ul_li li a:hover {
+            background-color: maroon;
+            border: 1px solid maroon;
+            border-radius: 14px;
+        }
+        .img_floow {
+
+            width: 1100px;
+            height: 200px;
+            margin: 0 auto;
+            clear: both;
+                 }
+        .img_floow #img_ul {
+            position: relative;
+            left: 150px;
+            width: 700px;
+            height: 200px;
+            overflow: hidden;
+        }
+        .img_floow #img_ul ul{
+            position: absolute;
+            left: 0;
+        }
+        .img_floow #img_ul li {
+            float: left;
+            list-style: none;
+        }
+        .img_floow #img_ul li img {
+            width: 200px;
+            height: 200px;
+        }
+        .container {
+            width: 950px;
+            height: auto;
+            margin: 0 auto;
+            border: 1px solid #cccccc;
+
+        }
+        .container:after {
+            zoom: 1;
+            display: block;
+            content: '';
+            clear: both;
+            line-height: 0;
+            visibility: hidden;
+        }
+        .container .container_l{
+            float: left;
+            width: 700px;
+            padding: 20px 16px;
+            border-right: 1px solid #ccc;
+        }
+        .container .container_l .container_l_nume span {
+            float: right;
+            margin-top: 7px;
+            padding-right: 10px;
+        }
+        .container .container_l .container_l_nume span a {
+            color: #666;;
+            font-size: 12px;
+            text-decoration: none;
+        }
+        .container .container_l .container_l_nume {
+            border-bottom: 2px solid #C10D0C;
+            padding-bottom: 34px;
+        }
+        .container h2 {
+            float: left;
+            cursor: pointer;
+            margin-right: 14px;
+        }
+        .container .container_l .container_l_nume li {
+            float: left;
+            list-style: none;
+            margin-top: 7px;
+        }
+        .container .container_l .container_l_nume .container_l_nume_last {
+            border: none;
+        }
+        .container .container_l .container_l_nume li a {
+            color: #666;;
+            font-size: 12px;
+            text-decoration: none;
+            border-right: 1px solid #cccccc;
+            padding: 0 10px;
+        }
+        .container .container_l .container_l_nume li a:hover {
+            text-decoration: underline;
+            color: red;
+        }
+
+        .container .container_l .picture {
+            zoom: 1;
+            margin-top: 28px;
+        }
+
+        .container .container_l .picture:after {
+            display: block;
+            content: 'clear';
+            clear: both;
+            line-height: 0;
+            visibility: hidden;
+        }
+        .container .container_l .picture ul {
+            margin-top: 10px;
+        }
+        .container .container_l .picture li {
+            list-style: none;
+            float: left;
+            width: 140px;
+            height: 200px;
+            margin: 4px 14px;
+        }
+        .container .container_l .picture li .p_p {
+            display: block;
+            width: 122px;;
+            font-size: 12px;
+            margin-top: -25px;
+            height: 20px;
+            line-height: 20px;
+            padding-left: 20px;
+            background-color: #666666;
+            opacity: 0.8;
+        }
+        .container .container_l .picture li img {
+            width: 140px;
+            height: 100px;
+            border: 1px solid #cccccc;
+        }
+        .container .container_l .picture li a {
+            text-decoration: none;
+            color: black;
+            font-size: 14px;
+            margin-top: 12px
+        }
+        .container .xingdie {
+            border: 1px solid #cccccc;
+            width: 690px;
+            height: 190px;
+            margin: 10px 0;
+        }
+        .container .xingdie .xingdie_shang:after {
+            zoom: 1;
+            content: "";
+            clear: both;
+            visibility: hidden;
+            line-height: 0;
+            display: block;
+        }
+        .container .xingdie .xingdie_shang {
+            width: 540px;
+            height: 150px;
+            overflow: hidden;
+            margin-left: 70px;
+            margin-top: 10px;
+            position: relative;
+        }
+        .container .xingdie .xingdie_shang li {
+            list-style: none;
+            float: left;
+            margin-right: 10px;
+            height: 150px;
+            width: 100px;
+        }
+        .container .xingdie .xingdie_shang ul {
+            position: absolute;
+            left: 0;
+        }
+        .container .xingdie .xingdie_shang li p {
+            font-size: 12px;
+        }
+        .container .xingdie .xingdie_shang li a {
+            text-decoration: none;
+            font-size: 12px;
+            width: 100px;
+            color: cadetblue;
+            text-align: center;
+        }
+        .container .xingdie ul li img {
+            width: 100px;
+            height: 100px;
+        }
+        .container .xingdie button {
+            width: 20px;
+            height: 20px;
+            border: none;
+            /*background-color: white;*/
+        }
+        .container .xingdie #left {
+            position: relative;
+            top: 78px;
+            left: 42px;
+        }
+        .container .xingdie #right {
+            position: relative;
+            top: -102px;
+            left: 620px;
+        }
+        .third {
+            width: 100%;
+            height: 204px;
+            background: linear-gradient(deepskyblue,aqua);
+        }
+        .container .container_r {
+            width: 217px;
+            float: left;
+            height: 100%;
+        }
+
+        .container_r .container_r_t {
+            width: 162px;
+            height: 76px;
+            font-size: 12px;
+            color: #666;
+            padding: 28px;
+            background: linear-gradient(0deg,#cccccc,white);
+            border-bottom: 1px solid #cccccc;
+        }
+        .container_r .container_r_t #btn {
+            margin-left: 34px;
+            padding: 6px 22px;
+            border: 1px solid #CF0F16;
+            border-radius: 5px;
+            color: white;
+            text-shadow: 0 1px 0 #8a060b;
+            background-color: #CF0F16;
+            text-decoration: none;
+        }
+
+        .container_r .container_r_t #btn:hover {
+            background-color: #af151b;
+        }
+        .container_r .container_r_t p  {
+            margin-bottom: 26px;
+        }
+        .foot {
+            background-color: #6a5a5a;
+            margin-top: 20px;
+            height: 200px;
+        }
+        #comeback {
+            width: 50px;
+            height: 40px;
+            position: fixed;
+            right: 0;
+            top: 300px;
+            border: 1px solid #cccccc;
+            display: none;
+        }
+        #comeback #comeback_l {
+            width: 50px;
+            height: 40px;
+            background-color: #8a060b;
+            font-size: 12px;
+            margin-left: 0;
+        }
+        #tanchu {
+            width: 500px;
+            height: 326px;
+            z-index: 1;
+            display: none;
+            position: absolute;
+            border: 1px solid#cccccc;
+            background-color: white;
+            border-radius: 6px;
+        }
+        #tanchu .tanchu_top {
+            position: relative;
+            height: 50px;
+            width: 500px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+            background-color: #2d2d2d;
+            line-height: 50px;
+            border-radius: 6px 6px 0 0;
+            cursor: move;
+        }
+        #tanchu .tanchu_c {
+            padding: 20px;
+            width: 200px;
+            margin: 0 auto;
+        }
+        #tanchu .tanchu_c input {
+            width: 200px;
+            height: 26px;
+            margin-bottom: 20px;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+        }
+        #tanchu .tanchu_c_la {
+            font-size: 12px;
+            color: #666;
+
+        }
+        #tanchu .tanchu_c_la input {
+            width: 20px;
+            height: 15px;
+            vertical-align: top
+        }
+        #tanchu .tanchu_c_la a {
+            margin-left: 68px;
+            text-decoration: none;
+            color: #666666;
+        }
+        #tanchu .tanchu_c button {
+            width: 200px;
+            background-color: #2172C1;
+            height: 32px;
+            color: white;
+            font-size: 14px;
+            border-radius: 6px;
+            letter-spacing: 7px;
+            line-height: 28px;
+            cursor: pointer;
+        }
+        #tanchu .tanchu_c button:hover {
+            background-color: #60AAF3;
+        }
+        #tanchu .tanchu_foot {
+            width: 500px;
+            margin-top: 20px;
+            border-top: 1px solid #cccccc;
+        }
+        #tanchu .tanchu_foot .tanchu_foot_deng {
+            width: 500px;
+            height: 20px;
+            margin-top: 20px;
+        }
+        #tanchu .tanchu_foot .tanchu_foot_deng a {
+            font-size: 12px;
+            color: #666666;
+            text-decoration: none;
+        }
+        #tanchu .tanchu_foot .tanchu_foot_deng .a1 {
+            float: right;
+        }
+        #tanchu #denglu_span {
+            z-index: 2;
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            top: 12px;
+            right: 10px;
+            background: url("img/layer.png") 0 -94px no-repeat;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="top">
+    <div class="wrop">
+        <div class="t_left">
+           <a href="http://www.baidu.com">网易云音乐</a>
+        </div>
+        <div class="t_center">
+            <ul>
+                <li class="active" ><a href="#">发现音乐</a></li>
+                <li><a href="#">我的音乐</a></li>
+                <li><a href="#">朋友</a></li>
+                <li><a href="#">音乐人</a></li>
+                <li style="position: relative"><a href="#" class="last">下载客服端</a>
+                    <sup class="cor"></sup></li>
+            </ul>
+
+        </div>
+        <div class="t_right">
+            <div class="input">
+                <input type="text" placeholder="单曲/歌手/专辑/歌曲/MV" id="input_t_right">
+            </div>
+            <div class="denglu"><a href="">登录</a></div>
+        </div>
+    </div>
+</div>
+<div class="nemu_list">
+    <ul class="ul_li">
+        <li><a href="" class="active_l">推荐</a></li>
+        <li><a href="">排行榜</a></li>
+        <li><a href="">歌单</a></li>
+        <li><a href="">主播电台</a></li>
+        <li><a href="">歌手</a></li>
+        <li><a href="">新碟上架</a></li>
+    </ul>
+</div>
+<div class="third" id="third">
+    <div class="img_floow">
+        <div id="img_ul">
+        <ul >
+            <li><a href=""><img src="img/1.jpg" alt=""></a></li>
+            <li><a href="http://www.baidu.com" target="_blank"><img src="img/u=873115762,3654566623&fm=11&gp=0.jpg" alt=""></a></li>
+            <li><a href=""><img src="img/2.jpg" alt=""></a></li>
+            <li><a href=""><img src="img/u=504634773,2884940232&fm=58.jpg" alt=""></a></li>
+            <li><a href=""><img src="img/3.jpg" alt=""></a></li>
+            <li><a href=""><img src="img/yuan.jpg" alt=""></a></li>
+            <li><a href=""><img src="img/4.jpg" alt=""></a></li>
+        </ul>
+    </div>
+    </div>
+</div>
+<div class="container">
+    <div class="container_l">
+        <div class="container_l_nume">
+            <div style="float: left">
+            <canvas id="myCanvas" width="30" height="30"></canvas>
+            </div>
+            <h2>热门推荐</h2>
+            <div >
+                <ul>
+                    <li><a href="">华语</a></li>
+                    <li><a href="">流行</a></li>
+                    <li><a href="">摇滚</a></li>
+                    <li><a href="">民谣</a></li>
+                    <li><a href="" class="container_l_nume_last">电子</a></li>
+                </ul>
+                <span><a href="">更多</a></span>
+            </div>
+        </div>
+        <div class="picture">
+            <ul>
+                <li>
+                    <a href=""><img src="img/yuan.jpg"></a>
+                    <P class="p_p">六宫粉黛无颜色</P>
+                    <P><a href="">你若听过他的歌，此生便有了挂念</a></P>
+                </li>
+                <li>
+                    <a href=""><img src="img/yuan.jpg"></a>
+                    <P class="p_p">六宫粉黛无颜色</P>
+                    <P><a href="">你若听过他的歌，此生便有了挂念</a></P>
+                </li>
+                <li>
+                    <a href=""><img src="img/yuan.jpg"></a>
+                    <P class="p_p">六宫粉黛无颜色</P>
+                    <P><a href="">你若听过他的歌，此生便有了挂念</a></P>
+                </li>
+                <li>
+                    <a href=""><img src="img/yuan.jpg"></a>
+                    <P class="p_p">六宫粉黛无颜色</P>
+                    <P><a href="">你若听过他的歌，此生便有了挂念</a></P>
+                </li>
+                <li>
+                    <a href=""><img src="img/yuan.jpg"></a>
+                    <P class="p_p">六宫粉黛无颜色</P>
+                    <P><a href="">你若听过他的歌，此生便有了挂念</a></P>
+                </li>
+                <li>
+                    <a href=""><img src="img/yuan.jpg"></a>
+                    <P class="p_p">六宫粉黛无颜色</P>
+                    <P><a href="">你若听过他的歌，此生便有了挂念</a></P>
+                </li>
+                <li>
+                    <a href=""><img src="img/yuan.jpg"></a>
+                    <P class="p_p">六宫粉黛无颜色</P>
+                    <P><a href="">你若听过他的歌，此生便有了挂念</a></P>
+                </li>
+                <li>
+                    <a href=""><img src="img/yuan.jpg"></a>
+                    <P class="p_p">六宫粉黛无颜色</P>
+                    <P><a href="">你若听过他的歌，此生便有了挂念</a></P>
+                </li>
+            </ul>
+        </div>
+        <div class="container_l_nume">
+            <div style="float: left">
+                <canvas id="myCanvas_l" width="30" height="30"></canvas>
+            </div>
+            <h2>热门推荐</h2>
+            <div >
+                <ul>
+                    <li><a href="">华语</a></li>
+                    <li><a href="">流行</a></li>
+                    <li><a href="">摇滚</a></li>
+                    <li><a href="">民谣</a></li>
+                    <li><a href="" class="container_l_nume_last">电子</a></li>
+                </ul>
+                <span><a href="">更多</a></span>
+            </div>
+        </div>
+        <div class="xingdie">
+            <button type="button" value="left" id="left"><</button>
+
+            <div class="xingdie_shang">
+                <ul id="xingdie_shang_ul">
+                    <li>
+                        <a href=""><img src="img/yuan.jpg"></a>
+                        <P><a href="">你若听过他的歌，此生便有了挂念</a></P>
+                    </li>
+                    <li>
+                        <a href=""><img src="img/u=504634773,2884940232&fm=58.jpg"></a>
+
+                        <P><a href="">你若听过他的歌，此生便有了挂念</a></P>
+                    </li>
+                    <li>
+                        <a href=""><img src="img/yuan.jpg"></a>
+
+                        <P><a href="">你若听过他的歌，此生便有了挂念</a></P>
+                    </li>
+                    <li>
+                        <a href=""><img src="img/yuan.jpg"></a>
+
+                        <P><a href="">你若听过他的歌，此生便有了挂念</a></P>
+                    </li>
+                    <li>
+                        <a href=""><img src="img/u=504634773,2884940232&fm=58.jpg"></a>
+
+                        <P><a href="">你若听过他的歌，此生便有了挂念</a></P>
+                    </li>
+                    <li>
+                        <a href=""><img src="img/1.jpg"></a>
+
+                        <P><a href="">你若听过他的歌，此生便有了挂念</a></P>
+                    </li>
+                    <li>
+                        <a href=""><img src="img/2.jpg"></a>
+
+                        <P><a href="">你若听过他的歌，此生便有了挂念</a></P>
+                    </li>
+                    <li>
+                        <a href=""><img src="img/3.jpg"></a>
+                        <P><a href="">你若听过他的歌，此生便有了挂念</a></P>
+                    </li>
+                </ul>
+
+            </div>
+            <button type="button" value="right" id="right">></button>
+        </div>
+        <div class="container_l_nume">
+            <div style="float: left">
+                <canvas id="myCanvas_q" width="30" height="30"></canvas>
+            </div>
+            <h2>热门推荐</h2>
+            <div >
+                <ul>
+                    <li><a href="">华语</a></li>
+                    <li><a href="">流行</a></li>
+                    <li><a href="">摇滚</a></li>
+                    <li><a href="">民谣</a></li>
+                    <li><a href="" class="container_l_nume_last">电子</a></li>
+                </ul>
+                <span><a href="">更多</a></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="container_r">
+        <div class="container_r_t">
+            <p>登录网易云音乐，可以享受无限收藏的乐趣，并且无线同步到手机</p>
+            <a href="javascript:;" id="btn">用户登录</a>
+        </div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<div id="tanchu">
+    <div class="tanchu_top" >
+        <p>手机号登录</p>
+        <span id="denglu_span"></span>
+    </div>
+    <div class="tanchu_c">
+        <form action="" method="post">
+            <input type="text" class="text_c" placeholder="请输入手机号">
+            <input type="text" class="text_c" placeholder="请输入密码">
+            <div class="tanchu_c_la">
+                <label><input type="checkbox">自动登录</label>
+                <a href="javascript:;">忘记密码？</a>
+            </div>
+            <button type="submit" value="登录" >登录</button>
+        </form>
+    </div>
+    <div class="tanchu_foot">
+        <div class="tanchu_foot_deng">
+            <a href="javascript:;" style="padding-left: 14px;color: #0c72c3">< 其他登录方式</a>
+            <a href="javascript:;" class="a1" style="padding-right: 14px; ">没有账号？免费注册 ></a>
+        </div>
+    </div>
+</div>
+<div class="foot">
+
+</div>
+<div id="comeback"><input id="comeback_l" type="button" value="回到顶部"></div>
+<script>
+
+
+
+  window.onload = function () {
+
+
+      var btn_L = document.getElementById('btn');
+      var tanchu = document.getElementById("tanchu");
+      var denglu_span = document.getElementById('denglu_span')
+      btn_L.onclick = function (ev) {
+          var oEvent = ev||event;
+          var scroll_q = document.documentElement.scrollTop||document.body.scrollTop;
+          var scroll_a = document.documentElement.scrollLeft||document.body.scrollLeft;
+          var clientW = document.documentElement.clientWidth||document.body.clientWidth;
+          var clienty = document.documentElement.clientHeight||document.body.clientHeight;
+          tanchu.style.left = clientW/2+scroll_a-200+'px'
+          tanchu.style.top = clienty/2+scroll_q-200+'px'
+          tanchu.style.display = "block";
+      }
+      denglu_span.onclick = function () {
+          tanchu.style.display = "none";
+      }
+
+      //拖拽
+
+      var dsx =0;
+      var dsy = 0;
+      tanchu.onmousedown = function (ev) {
+          var oEvent = ev||event;
+           dsx = oEvent.clientX-tanchu.offsetLeft;
+           dsy = oEvent.clientY-tanchu.offsetTop;
+
+          document.onmousemove = function (ev) {
+
+              var oEvent = ev||event;
+              tanchu.style.left = oEvent.clientX-dsx+'px';
+              tanchu.style.top = oEvent.clientY-dsy+'px';
+
+          }
+          tanchu.onmouseup = function () {
+              document.onmousemove = null;
+              tanchu.onmouseup = null;
+          }
+
+      }
+
+      var comback_l = document.getElementById('comeback_l')
+      var comback = document.getElementById('comeback');
+
+      window.onscroll = function () {
+          if(document.documentElement.scrollTop||document.body.scrollTop>200){
+              comback.style.display = "block";
+          }else {
+              comback.style.display = "none";
+          }
+      }
+
+      comback_l.onclick = function () {
+          document.documentElement.scrollTop = document.body.scrollTop = 0+'px';
+      }
+
+        var img_div = document.getElementById('img_ul');
+        var img_ul = img_div.getElementsByTagName('ul')[0];
+        var img_li = img_ul.getElementsByTagName('li');
+
+        img_ul.innerHTML+=img_ul.innerHTML;
+        var speed = -3;
+        var timer = null;
+         img_ul.style.width = img_li[0].offsetWidth*img_li.length+'px';
+        function imgMove() {
+            img_ul.style.left = img_ul.offsetLeft+speed+'px';
+            var xx = parseInt(img_ul.style.width);
+            if(img_ul.offsetLeft<-xx/2){
+                img_ul.style.left = "0px";
+            }
+        }
+
+
+      timer=setInterval(imgMove,30);
+      img_ul.onmouseover = function () {
+          clearInterval(timer);
+      }
+      img_ul.onmouseout = function () {
+          timer=setInterval(imgMove,30);
+      }
+
+
+      var c=document.getElementById("myCanvas");
+      var ctx=c.getContext("2d");
+      ctx.beginPath();
+      ctx.strokeStyle = "#C10D0C";
+      ctx.fillStyle="#C10D0C";
+      ctx.arc(15,15,7,0,2*Math.PI);
+      ctx.fill();
+
+      ctx.stroke();
+      ctx.closePath();
+      ctx.beginPath();
+      ctx.fillStyle="white";
+      ctx.arc(15,15,3,0,2*Math.PI);
+      ctx.fill();
+      var c1=document.getElementById("myCanvas_l");
+      var ctx1=c1.getContext("2d");
+      ctx1.beginPath();
+      ctx1.strokeStyle = "#C10D0C";
+      ctx1.fillStyle="#C10D0C";
+      ctx1.arc(15,15,7,0,2*Math.PI);
+      ctx1.fill();
+
+      ctx1.stroke();
+      ctx1.closePath();
+      ctx1.beginPath();
+      ctx1.fillStyle="white";
+      ctx1.arc(15,15,3,0,2*Math.PI);
+      ctx1.fill();
+      var c2=document.getElementById("myCanvas_q");
+      var ctx2=c2.getContext("2d");
+      ctx2.beginPath();
+      ctx2.strokeStyle = "#C10D0C";
+      ctx2.fillStyle="#C10D0C";
+      ctx2.arc(15,15,7,0,2*Math.PI);
+      ctx2.fill();
+
+      ctx2.stroke();
+      ctx2.closePath();
+      ctx2.beginPath();
+      ctx2.fillStyle="white";
+      ctx2.arc(15,15,3,0,2*Math.PI);
+      ctx2.fill();
+    }
+
+</script>
+</body>
+</html>

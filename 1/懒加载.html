@@ -39,7 +39,9 @@
             viewH = document.documentElement.clientHeight;
     function lazyload() {
         var nodes = document.querySelectorAll('img[data-src]');
-
+        //Array.prototype.forEach.call(): 也可以写出 [].forEach.call()
+        //[] 就是个数组，而且是用不到的空数组。用来就是为了访问它的数组相关方法
+        //是一种快速的方法访问 forEach ，并将空数组的 this 换成想要遍历的list
         Array.prototype.forEach.call(nodes,function (item,index) {
             var rect;
             if(item.dataset.src === '') return;
