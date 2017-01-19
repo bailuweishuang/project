@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .top {
+            width: 500px;
+            margin: 10px auto;
+        }
+        #contanier ul {
+            list-style: none;
+        }
+        #contanier ul li {
+            list-style: none;
+            display: inline-block;
+        }
+        #contanier ul li a {
+            text-decoration: none;
+            display: block;
+            border:1px solid #cccccc;
+            padding: 4px;
+        }
+        #contanier ul li .active {
+            background: #2cc36b;
+        }
+        #tabs>div {
+            display: none;
+            width: 150px;
+            height: 100px;
+            border: 1px;
+            border: 1px solid #cccccc;
+        }
+        #tabs .hidden {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="top">
+    <div id="contanier">
+        <ul><!--这里的li标签会产生间距问题  愿意是由于li标签之间的空格引起的 解决方法：1 排列的时候排在一排 2 li选择器中加入 float: left; 让li变成浮动，让各个<li>标签紧挨着排列。同时还可以看到 float具有inline元素特性 3：设置ul标签的属性 font-size ＝ 0，再重新设置li标签的 font-size-->
+            <li><a href="javascript:;" class="active">实时</a></li>
+            <li><a href="javascript:;">体育</a></li>
+            <li><a href="javascript:;">竞技</a></li>
+        </ul>
+    </div>
+    <div id="tabs">
+        <div class="hidden">天天向上</div>
+        <div>贪图享受</div>
+        <div>唐突西施</div>
+    </div>
+</div>
+<script>
+    window.onload = function () {
+        var con = document.getElementById("contanier");
+        var oUl = con.getElementsByTagName('ul')[0];
+        var oA = oUl.getElementsByTagName('a');
+        var tabs = document.getElementById('tabs');
+        var divs = tabs.getElementsByTagName('div');
+
+        for(var i=0;i<oA.length;i++){
+            oA[i].index = i;
+            oA[i].onclick = function () {
+                for(var j=0;j<divs.length;j++){
+                    divs[j].style.display = "none";
+                    oA[j].className = "";
+                }
+                this.className = "active";
+                divs[this.index].style.display = 'block';
+            }
+        }
+    }
+</script>
+</body>
+</html>
